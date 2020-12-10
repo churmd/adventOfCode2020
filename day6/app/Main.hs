@@ -7,4 +7,6 @@ main = do
     putStrLn "Day 6"
     putStrLn "problem 1 solution"
     solve1
+    putStrLn "problem 2 solution"
+    solve2
 

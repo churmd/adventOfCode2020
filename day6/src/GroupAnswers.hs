@@ -9,6 +9,12 @@ type GroupAnswers = [PersonsAnswers]
 getAGroupsUniqueAnswers :: GroupAnswers -> [Answer]
 getAGroupsUniqueAnswers ga = nub $ concat ga
 
+answersEveryoneHad :: GroupAnswers -> [Answer]
+answersEveryoneHad ga = answersEveryoneHadHelper ga (getAGroupsUniqueAnswers ga)
+
+answersEveryoneHadHelper :: GroupAnswers -> [Answer] -> [Answer]
+answersEveryoneHadHelper ps allAnswers
+    = foldl intersect allAnswers ps
 
 allGroupsParser :: String -> [GroupAnswers]
 allGroupsParser input = groupsParser (lines input) [] []

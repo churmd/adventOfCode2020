@@ -12,6 +12,15 @@ solve1 = do
     print sumOfGroupAnswers
 
 
+solve2 :: IO()
+solve2 = do
+    input <- readInput
+    let groups = allGroupsParser input
+    let answersEveryoneInTheGroupHad = map answersEveryoneHad groups
+    let answersEveryoneInTheGroupHadCount = map length answersEveryoneInTheGroupHad
+    let sumOfGroupAnswers = sum answersEveryoneInTheGroupHadCount
+    print sumOfGroupAnswers
+
 readInput :: IO String
 readInput = do
     let file = "input.txt"
