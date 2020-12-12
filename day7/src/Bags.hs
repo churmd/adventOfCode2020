@@ -30,17 +30,16 @@ evalRule (BagRule r subBags) allRules bag
         findAllRules = mapMaybe findRule subBagsNames
         evalSubRules = map (\sr -> evalRule sr allRules bag) findAllRules
 
-canRuleContainBag :: [BagRule] -> BagRule -> Bag -> Bool
-canRuleContainBag _ (BagRule _ []) _ = False
-canRuleContainBag allRules (BagRule _ containedBags) bag = bag `elem` bagTypesContained || or canSubRulesContainBag
-    where
-        bagTypesContained = map snd containedBags
-        getRuleForContainedBag bagName = find (\(BagRule name _) -> name == bagName) allRules
-        canSubRuleContainBag maybeRule = case maybeRule of 
-                                            Nothing -> False
-                                            Just rule -> canRuleContainBag allRules rule bag
-        getAllSubRules = map getRuleForContainedBag bagTypesContained
-        canSubRulesContainBag = map canSubRuleContainBag getAllSubRules
+numOfSubBags :: BagRule -> [BagRule] -> Int 
+numOfSubBags (BagRule _ []) _ = 0
+numOfSubBags (BagRule _ containedBags) allRules = countSubBags containedBags allRules
+
+countSubBags :: [(Int, Bag)] -> [BagRule] -> Int 
+countSubBags [] _ = 0
+countSubBags ((count, bagName) : subBags) allRules = 
+    case find (\(BagRule name _) -> name == bagName) allRules of 
+        Nothing -> error $ "could not find rule for bag " ++ bagName
+        Just r -> count + (count * numOfSubBags r allRules) + countSubBags subBags allRules
 
 -- parsing  
 

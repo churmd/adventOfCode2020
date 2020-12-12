@@ -8,3 +8,4 @@ main = do
     putStrLn "problem 1 solution (very slow, would be better with dynamic programming)"
     solve1
     putStrLn "problem 2 solution"
+    solve2

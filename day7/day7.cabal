@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e5278fb6f0ebf76a51717013bc2bcc12aaf1c1ff3d53885983c835e9f5318d42
+-- hash: cb4e19abf25fce5ed7090af96712be1493cc487d9d26b8b3d539e89af0e6e7ad
 
 name:           day7
 version:        0.1.0.0
@@ -34,7 +34,8 @@ library
   hs-source-dirs:
       src
   build-depends:
-      base >=4.7 && <5
+      List
+    , base >=4.7 && <5
     , parsec
   default-language: Haskell2010
 
@@ -46,7 +47,8 @@ executable day7-exe
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      List
+    , base >=4.7 && <5
     , day7
     , parsec
   default-language: Haskell2010
@@ -60,7 +62,8 @@ test-suite day7-test
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      List
+    , base >=4.7 && <5
     , day7
     , parsec
   default-language: Haskell2010
