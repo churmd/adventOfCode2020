@@ -1,7 +1,6 @@
 module Instructions where
 
 import Text.ParserCombinators.Parsec
-import Data.List
 
 data Operation = ACC | JMP | NOP deriving (Show, Eq)
 type Instruction = (Operation, Int)
@@ -13,14 +12,14 @@ instance Read Operation where
     readsPrec _ ('n':'o':'p':rest) = [(NOP, rest)] 
     readsPrec _ _ = []
 
+runUntilTerm :: BootCode -> (Bool, Int)
+runUntilTerm bc = runAndAccUntilTerm bc [] 0 0
 
-runUntilLoop :: BootCode -> Int
-runUntilLoop bc = runAndAccUntilLoop bc [] 0 0
-
-runAndAccUntilLoop :: BootCode -> [Int] -> Int -> Int -> Int
-runAndAccUntilLoop bc visited index acc
-    | index `elem` visited = acc
-    | otherwise = runAndAccUntilLoop bc (index:visited) nextIndex newAcc
+runAndAccUntilTerm :: BootCode -> [Int] -> Int -> Int -> (Bool, Int)
+runAndAccUntilTerm bc visited index acc
+    | index == length bc = (True, acc)
+    | index `elem` visited = (False, acc)
+    | otherwise = runAndAccUntilTerm bc (index:visited) nextIndex newAcc
     where 
         currentInstr = bc!!index 
         (nextIndex, newAcc) = nextIndexAcc currentInstr (index, acc)
@@ -29,6 +28,28 @@ nextIndexAcc :: Instruction -> (Int, Int) -> (Int, Int)
 nextIndexAcc (NOP, _) (index, acc) = (index+1, acc)
 nextIndexAcc (ACC, val) (index, acc) = (index+1, acc + val)
 nextIndexAcc (JMP, val) (index, acc) = (index+val, acc)
+
+changeInstructionOpAtIndex :: BootCode -> Int -> (Bool, BootCode)
+changeInstructionOpAtIndex bc index 
+    | not (canChangeInstr currentInstr) = (False, bc)
+    | otherwise = (True, changeElemAt index newInstr bc)
+    where 
+        currentInstr = bc!!index
+        newInstr = changeInstructionOp currentInstr
+
+canChangeInstr :: Instruction -> Bool
+canChangeInstr (ACC, _ ) = False
+canChangeInstr _ = True
+
+changeInstructionOp :: Instruction -> Instruction
+changeInstructionOp instr@(ACC, _) = instr
+changeInstructionOp (JMP, val) = (NOP, val)
+changeInstructionOp (NOP, val) = (JMP, val)
+
+changeElemAt :: Int -> a -> [a] -> [a] 
+changeElemAt 0 val (_ : xs) = val : xs
+changeElemAt _ _ [] = error "index to change elem at is larger than the list length"
+changeElemAt acc val (x : xs) = x : changeElemAt (acc - 1) val xs
 
 -- parsing 
 
