@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 780ed782be9a4436a6fe7f86b3ed179827eff8ad47d99c394a39f37395c4afe5
+-- hash: 2be48f02b2b76f2ad8df1f8b211cff812796e0f66aa140b62b701e87fb41bdde
 
 name:           day11
 version:        0.1.0.0
@@ -28,6 +28,8 @@ source-repository head
 library
   exposed-modules:
       Lib
+      Rules1
+      Rules2
       SeatingPlan
   other-modules:
       Paths_day11
