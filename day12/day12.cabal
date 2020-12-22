@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: f95d68afcba263b95296f0312d8624c22d53dca2fa7c25d8597c00a4929d9b2f
+-- hash: f96e8133359a08d7402b7c41c687909e595da8862727a86e4eb6ce3ae428738f
 
 name:           day12
 version:        0.1.0.0
@@ -28,6 +28,9 @@ source-repository head
 library
   exposed-modules:
       Lib
+      Navigation
+      Problem1
+      Problem2
   other-modules:
       Paths_day12
   hs-source-dirs:
