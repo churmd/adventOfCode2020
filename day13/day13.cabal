@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 9a6072c4d714efb31879e1dfccf872c538346c099da008ab94c9e1835f3418d9
+-- hash: c03efb5ce0d1f54b062d2f3eb4ddd0f64e4d6eac8e0336a05ad0f8ef1bc3a2c0
 
 name:           day13
 version:        0.1.0.0
@@ -27,6 +27,7 @@ source-repository head
 
 library
   exposed-modules:
+      BusSchedule
       Lib
   other-modules:
       Paths_day13
@@ -34,6 +35,7 @@ library
       src
   build-depends:
       base >=4.7 && <5
+    , text
   default-language: Haskell2010
 
 executable day13-exe
@@ -46,6 +48,7 @@ executable day13-exe
   build-depends:
       base >=4.7 && <5
     , day13
+    , text
   default-language: Haskell2010
 
 test-suite day13-test
@@ -59,4 +62,5 @@ test-suite day13-test
   build-depends:
       base >=4.7 && <5
     , day13
+    , text
   default-language: Haskell2010
