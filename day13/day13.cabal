@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c03efb5ce0d1f54b062d2f3eb4ddd0f64e4d6eac8e0336a05ad0f8ef1bc3a2c0
+-- hash: 2f1e77d2468c1a745c5f70cabb75b7f98a2d3536e7baae6d74ef284f047fe5c5
 
 name:           day13
 version:        0.1.0.0
@@ -29,6 +29,7 @@ library
   exposed-modules:
       BusSchedule
       Lib
+      Problem2
   other-modules:
       Paths_day13
   hs-source-dirs:

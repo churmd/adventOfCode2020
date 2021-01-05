@@ -1,6 +1,7 @@
 module Lib where
 
 import BusSchedule
+import Problem2
 
 solve1 :: IO()
 solve1 = do
@@ -12,6 +13,13 @@ solve1 = do
   print $ show (bestbus, bestTime)
   let answer = bestbus * (bestTime - departTime)
   print $ show answer
+
+solve2 :: IO()
+solve2 = do
+  inputLines <- readInput
+  let busOffsets = generateBusOffsets (inputLines!!1)
+  let timestamp = findEarliestTime busOffsets
+  print $ show timestamp
 
 readInput :: IO [String]
 readInput = do
